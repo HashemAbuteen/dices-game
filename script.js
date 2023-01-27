@@ -18,7 +18,7 @@ const winnerAnnouncment = document.getElementById("winner-announcment");
 let maxScore;
 
 startButton.addEventListener("click" , (event)=> {
-    if(inputGoal.value === ""){
+    if(inputGoal.value === "" || inputGoal.value>100){
         inputGoal.classList.add("empty");
     }
     else {
