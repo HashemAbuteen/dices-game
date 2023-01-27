@@ -9,7 +9,8 @@ const current1Text = document.getElementById("current-1");
 const current2Text = document.getElementById("current-2");
 const rollButton = document.getElementById("roll-button");
 const player1Section = document.getElementById("player-1-section")
-const player2Section = document.getElementById("player-2-section")
+const player2Section = document.getElementById("player-2-section");
+const turnOverlay = document.getElementById("turn-overlay");
 let maxScore;
 
 startButton.addEventListener("click" , (event)=> {
@@ -101,12 +102,10 @@ const updateValues = ()=> {
     current1Text.innerText = current1;
     current2Text.innerText = current2;
     if(player1Turn){
-        player1Section.classList.replace("not-turn" , "turn");
-        player2Section.classList.replace("turn" , "not-turn");
+        turnOverlay.classList.replace("player-2" , "player-1");
     }
     else {
-        player2Section.classList.replace("not-turn" , "turn");
-        player1Section.classList.replace("turn" , "not-turn");
+        turnOverlay.classList.replace("player-1" , "player-2");
     }
 }
 

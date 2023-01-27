@@ -13,9 +13,7 @@ body main {
     height: 100%;
 }
 
-#scene-1{
-    display: block;
-}
+
 #scene-2{
     display: none;
     font-size: 1.5rem;
@@ -32,14 +30,13 @@ body main {
     justify-content: space-around;
     color: black;
     padding: 0 10%;
+    background-color: #bbb;
 }
 
 #player-1-section {
-    background-color: aqua;
 }
 
 #player-2-section {
-    background-color:aquamarine ;
     text-align: right;
 }
 
@@ -52,10 +49,6 @@ body main {
     align-items: center;
     flex-direction: column;
     gap: 10%;
-}
-
-#scene-2>section.turn {
-    background-color: red;
 }
 
 #scene-1 {
@@ -89,5 +82,18 @@ button:disabled {
     color: white;
     width: 100%;
     padding: 1rem;
+}
+
+#scene-2 #turn-overlay {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    background-color: red;
+    opacity: 0.3;
+    transition: transform 2s;
+}
+
+#scene-2 #turn-overlay.player-2 {
+    transform: translateX(100%);
 }
 
