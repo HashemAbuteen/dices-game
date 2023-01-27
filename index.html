@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Dice Roll</title>
+  </head>
+  <body>
+    <main id="scene-1">
+      <h1>The Game Of Dice</h1>
+      <h2>Rules & Dicreption</h2>
+      <p>
+        Roll game is a 2 player game, playing in rounds, In each turn, a player
+        rolls 2 dice as many times as he wishes. Each result will get added to
+        his round’s score. But if the player rolls a double six all his round’s
+        score gets lost. After that, it's the next player’s turn. A player can
+        choose to ‘Hold’, which means that his round’s score gets added to his
+        global score. After that, it's the next player's turn. The first player
+        to pass predefined score points loose. The first player to reach
+        predefined score exactly wins.
+      </p>
+      <div>
+        <label for="goal">Winning score:</label>
+        <input type="number" id="goal" value="50" />
+      </div>
+      <button id="start-button">Start</button>
+    </main>
+    <main id="scene-2">
+      <section id="player-1-section" class="not-turn">
+        <div class="top-score">
+          <h1>PLAYER 1</h1>
+          <p class="score" id="score-1">99</p>
+        </div>
+        <div class="bottom-score">
+          <h2>Current</h2>
+          <p class="current-score" id="current-1">66</p>
+        </div>
+      </section>
+      <section id="player-2-section" class="not-turn">
+        <div class="top-score">
+          <h1>PLAYER 2</h1>
+          <p class="score" id="score-2">99</p>
+        </div>
+        <div class="bottom-score">
+          <h2>Current</h2>
+          <p class="current-score" id="current-2">66</p>
+        </div>
+      </section>
+      <div id="controls">
+        <button onclick="goHome()">Home</button>
+        <button onclick="resetGame()">Reset Game</button>
+        <button id="roll-button" onclick="roll()">Roll</button>
+        <button id="hold-button" onclick="hold()">Hold</button>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
