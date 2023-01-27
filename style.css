@@ -7,6 +7,7 @@ body {
     height: 100vh;
     background-color: black;
     color: white;
+    overflow: hidden;
 }
 body main {
     width: 100%;
@@ -96,5 +97,13 @@ button:disabled {
 
 #scene-2 #turn-overlay.player-2 {
     transform: translateX(100%);
+}
+
+@media(max-width : 700px) {
+    #scene-2>section{
+        justify-content: flex-end;
+        padding-bottom: 5%;
+        gap:5%
+    }
 }
 
