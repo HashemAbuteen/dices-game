@@ -39,7 +39,7 @@ const startGame = ()=> {
 }
 
 const goHome = ()=> {
-    scene1.style.display = "felx";
+    scene1.style.display = "flex";
     scene2.style.display = "none";
 }
 
