@@ -14,6 +14,7 @@ const player2Section = document.getElementById("player-2-section");
 const turnOverlay = document.getElementById("turn-overlay");
 const firstDice = document.getElementById("first-dice");
 const secondDice = document.getElementById("second-dice");
+const winnerAnnouncment = document.getElementById("winner-announcment");
 let maxScore;
 
 startButton.addEventListener("click" , (event)=> {
@@ -39,6 +40,12 @@ const startGame = ()=> {
     holdButton.disabled = true;
     rollButton.disabled = false;
     stopButton.disabled = true;
+    winnerAnnouncment.innerText = "";
+    player1Section.classList.remove("winner" , "loser");
+    player2Section.classList.remove("winner" , "loser");
+    turnOverlay.classList.add("starting");
+    turnOverlay.classList.remove("end");
+    setTimeout(()=>turnOverlay.classList.remove("starting") , 200);
     updateValues();
 }
 
@@ -90,7 +97,18 @@ const rollDices = ()=> {
     return firstDice+secondDice;
 }
 
-const endGame = ()=> {
+const endGame = (winner , message)=> {
+    turnOverlay.classList.add("end");
+    if(winner === 1){
+        player1Section.classList.add("winner");
+        player2Section.classList.add("loser");
+        winnerAnnouncment.innerText = message;
+    }
+    if(winner === 2){
+        player2Section.classList.add("winner");
+        player1Section.classList.add("loser");
+        winnerAnnouncment.innerText = message;
+    }
     rollButton.disabled = true;
     holdButton.disabled = true;
 }
@@ -122,12 +140,10 @@ const stopRolling = ()=> {
         current1 += result;
         updateValues();
         if(current1 + score1 > maxScore){
-            console.log("player 2 won : player 1 passed the limit");
-            endGame();
+            endGame(2 , "player 2 won : player 1 passed the limit");
         }
         else if(current1 + score1 == maxScore){
-            console.log("player 1 won : player 1 got the exact score");
-            endGame();
+            endGame(1 , "player 1 won : player 1 got the exact score");
         }
         else {
             holdButton.disabled = false;
@@ -137,12 +153,10 @@ const stopRolling = ()=> {
         current2 += result;
         updateValues();
         if(current2 + score2 > maxScore){
-            console.log("player 1 won : player 2 passed the limit");
-            endGame();
+            endGame(1 , "player 1 won : player 2 passed the limit");
         }
         else if(current1 + score1 == maxScore){
-            console.log("player 2 won : player 2 got the exact score");
-            endGame();
+            endGame(2 , "player 2 won : player 2 got the exact score");
         }
         else {
             holdButton.disabled = false;
