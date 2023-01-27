@@ -15,6 +15,7 @@ const turnOverlay = document.getElementById("turn-overlay");
 const firstDice = document.getElementById("first-dice");
 const secondDice = document.getElementById("second-dice");
 const winnerAnnouncment = document.getElementById("winner-announcment");
+const tragetLabel = document.getElementById("target-label");
 let maxScore;
 
 startButton.addEventListener("click" , (event)=> {
@@ -25,6 +26,7 @@ startButton.addEventListener("click" , (event)=> {
         maxScore = inputGoal.value;
         scene1.style.display = "none";
         scene2.style.display = "flex";
+        tragetLabel.innerText = "Target: " + maxScore;
         startGame();
     }
 })

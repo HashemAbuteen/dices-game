@@ -50,6 +50,7 @@ body main {
     flex-direction: column;
     gap: 3%;
     padding-top: 20%;
+    color: black;
 }
 
 #scene-1 {
