@@ -153,8 +153,8 @@ const stopRolling = ()=> {
 }
 
 const getResult = ()=>{
-    const firstResult = Number(firstDice.src.charAt(firstDice.src.indexOf("dice")+4));
-    const secondResult = Number(secondDice.src.charAt(secondDice.src.indexOf("dice")+4));
+    const firstResult = Number(firstDice.src.charAt(firstDice.src.indexOf(".png")-1));
+    const secondResult = Number(secondDice.src.charAt(secondDice.src.indexOf(".png")-1));
     return firstResult + secondResult;
 }
 
