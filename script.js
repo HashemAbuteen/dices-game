@@ -22,7 +22,6 @@ startButton.addEventListener("click" , (event)=> {
     }
     else {
         maxScore = inputGoal.value;
-        console.log("max score" , maxScore);
         scene1.style.display = "none";
         scene2.style.display = "flex";
         startGame();
@@ -101,7 +100,6 @@ const startRoll = ()=> {
         rollButton.disabled = true;
         stopButton.disabled = false;
         holdButton.disabled = true;
-        console.log("Rolling");
         const first =  Math.floor((Math.random()*6+1));
         const second = Math.floor((Math.random()*6+1));
         firstDice.src = "./imgs/dice" + first + ".png";
