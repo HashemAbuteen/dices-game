@@ -3,6 +3,7 @@ const inputGoal = document.getElementById("goal");
 const scene1 = document.getElementById("scene-1");
 const scene2 = document.getElementById("scene-2");
 const holdButton = document.getElementById("hold-button");
+const stopButton = document.getElementById("stop-button");
 const score1Text = document.getElementById("score-1");
 const score2Text = document.getElementById("score-2");
 const current1Text = document.getElementById("current-1");
@@ -11,6 +12,8 @@ const rollButton = document.getElementById("roll-button");
 const player1Section = document.getElementById("player-1-section")
 const player2Section = document.getElementById("player-2-section");
 const turnOverlay = document.getElementById("turn-overlay");
+const firstDice = document.getElementById("first-dice");
+const secondDice = document.getElementById("second-dice");
 let maxScore;
 
 startButton.addEventListener("click" , (event)=> {
@@ -36,6 +39,7 @@ const startGame = ()=> {
     player1Turn = true;
     holdButton.disabled = true;
     rollButton.disabled = false;
+    stopButton.disabled = true;
     updateValues();
 }
 
@@ -48,38 +52,10 @@ const resetGame = ()=> {
     startGame();
 }
 
+let rolling = true;
 const roll = ()=>{
-    const result = rollDices();
-    if(player1Turn){
-        current1 += result;
-        updateValues();
-        if(current1 + score1 > maxScore){
-            console.log("player 2 won : player 1 passed the limit");
-            endGame();
-        }
-        else if(current1 + score1 == maxScore){
-            console.log("player 1 won : player 1 got the exact score");
-            endGame();
-        }
-        else {
-            holdButton.disabled = false;
-        }
-    }
-    if(!player1Turn){
-        current2 += result;
-        updateValues();
-        if(current2 + score2 > maxScore){
-            console.log("player 1 won : player 2 passed the limit");
-            endGame();
-        }
-        else if(current1 + score1 == maxScore){
-            console.log("player 2 won : player 2 got the exact score");
-            endGame();
-        }
-        else {
-            holdButton.disabled = false;
-        }
-    }
+    rolling = true;
+    startRoll();
 }
 
 const hold = ()=>{
@@ -120,6 +96,67 @@ const endGame = ()=> {
     holdButton.disabled = true;
 }
 
+const startRoll = ()=> {
+    if(rolling){
+        rollButton.disabled = true;
+        stopButton.disabled = false;
+        holdButton.disabled = true;
+        console.log("Rolling");
+        const first =  Math.floor((Math.random()*6+1));
+        const second = Math.floor((Math.random()*6+1));
+        firstDice.src = "./imgs/dice" + first + ".png";
+        secondDice.src = "./imgs/dice" + second + ".png";
+        setTimeout(startRoll , 100);
+    }
+}
+
+const stopRolling = ()=> {
+    rolling = false;
+    const result = getResult();
+    rollButton.disabled = false;
+    if(result === 12){
+        current1 = 0;
+        current2 = 0;
+        hold();
+    }
+    stopButton.disabled = true;
+    if(player1Turn){
+        current1 += result;
+        updateValues();
+        if(current1 + score1 > maxScore){
+            console.log("player 2 won : player 1 passed the limit");
+            endGame();
+        }
+        else if(current1 + score1 == maxScore){
+            console.log("player 1 won : player 1 got the exact score");
+            endGame();
+        }
+        else {
+            holdButton.disabled = false;
+        }
+    }
+    if(!player1Turn){
+        current2 += result;
+        updateValues();
+        if(current2 + score2 > maxScore){
+            console.log("player 1 won : player 2 passed the limit");
+            endGame();
+        }
+        else if(current1 + score1 == maxScore){
+            console.log("player 2 won : player 2 got the exact score");
+            endGame();
+        }
+        else {
+            holdButton.disabled = false;
+        }
+    }
+}
+
+const getResult = ()=>{
+    const firstResult = Number(firstDice.src.charAt(firstDice.src.indexOf("dice")+4));
+    const secondResult = Number(secondDice.src.charAt(secondDice.src.indexOf("dice")+4));
+    return firstResult + secondResult;
+}
 
 
 
