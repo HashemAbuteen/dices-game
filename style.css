@@ -3,11 +3,12 @@
     margin: 0;
     padding: 0;
 }
+html {
+    background-color: #888;
+}
 body {
     height: 100vh;
-    background-color: black;
     color: white;
-    overflow: hidden;
 }
 body main {
     width: 100%;
@@ -18,6 +19,10 @@ body main {
 #scene-2{
     display: none;
     font-size: 1.5rem;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #888;
+    padding-bottom: 5%;
 }
 #goal.empty {
     border-color: red;
@@ -31,15 +36,9 @@ body main {
     justify-content: space-around;
     color: black;
     padding: 0 10%;
-    background-color: #bbb;
+    align-items: center;
 }
 
-#player-1-section {
-}
-
-#player-2-section {
-    text-align: right;
-}
 
 #controls {
     position: fixed;
@@ -60,6 +59,8 @@ body main {
     gap: 3%;
     padding: 5%;
     font-size: 1.5rem;
+    background-color: black;
+    height: 100vh;
 }
 #scene-1 h1 {
     text-align: center;
@@ -88,10 +89,10 @@ button:disabled {
 
 #scene-2 #turn-overlay {
     width: 50%;
-    height: 100%;
+    height: 100vh;
     position: absolute;
-    background-color: red;
-    opacity: 0.3;
+    background-color: white;
+    opacity: 0.15;
     transition: transform 2s;
 }
 
@@ -104,6 +105,28 @@ button:disabled {
         justify-content: flex-end;
         padding-bottom: 5%;
         gap:5%
+    }
+    #scene-1 {
+        font-size: 1.2rem;
+    }
+    #controls {
+        padding-top: 3%;
+    }
+    #scene-2>section{
+        align-items: center;
+        padding: 0 1%;
+        text-align: center;
+    }
+}
+
+@media(max-height : 600px){
+    #scene-2 #player-1-section {
+        align-items: flex-start;
+        justify-content: center;
+    }
+    #scene-2 #player-2-section {
+        align-items: flex-end;
+        justify-content: center;
     }
 }
 
