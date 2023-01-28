@@ -16,6 +16,8 @@ const firstDice = document.getElementById("first-dice");
 const secondDice = document.getElementById("second-dice");
 const winnerAnnouncment = document.getElementById("winner-announcment");
 const tragetLabel = document.getElementById("target-label");
+const player1AllWins = document.getElementsByClassName("all-time-wins")[0];
+const player2AllWins = document.getElementsByClassName("all-time-wins")[1];
 let maxScore;
 
 startButton.addEventListener("click" , (event)=> {
@@ -36,6 +38,8 @@ let score2 = 0;
 let current1 = 0;
 let current2 = 0;
 let player1Turn;
+let player1Wins = localStorage.getItem("player1-total-score") || 0;
+let player2Wins = localStorage.getItem("player2-total-score") || 0;
 const startGame = ()=> {
     score1 = score2 = current1 = current2 = 0;
     player1Turn = true;
@@ -85,6 +89,8 @@ const updateValues = ()=> {
     score2Text.innerText = score2;
     current1Text.innerText = current1;
     current2Text.innerText = current2;
+    player1AllWins.innerText = player1Wins;
+    player2AllWins.innerText = player2Wins;
     if(player1Turn){
         turnOverlay.classList.replace("player-2" , "player-1");
     }
@@ -105,14 +111,19 @@ const endGame = (winner , message)=> {
         player1Section.classList.add("winner");
         player2Section.classList.add("loser");
         winnerAnnouncment.innerText = message;
+        player1Wins ++;
+        localStorage.setItem("player1-total-score" , player1Wins);
     }
     if(winner === 2){
         player2Section.classList.add("winner");
         player1Section.classList.add("loser");
         winnerAnnouncment.innerText = message;
+        player2Wins ++;
+        localStorage.setItem("player2-total-score" , player2Wins);
     }
     rollButton.disabled = true;
     holdButton.disabled = true;
+    updateValues();
 }
 
 const startRoll = ()=> {
