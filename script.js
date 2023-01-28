@@ -18,7 +18,34 @@ const winnerAnnouncment = document.getElementById("winner-announcment");
 const tragetLabel = document.getElementById("target-label");
 const player1AllWins = document.getElementsByClassName("all-time-wins")[0];
 const player2AllWins = document.getElementsByClassName("all-time-wins")[1];
+const playersList = document.getElementById("players-names");
+const player1Name = document.getElementById("player-1-name");
+const player2Name = document.getElementById("player-2-name");
+const player1NameLabel = document.getElementsByClassName("player-name")[0];
+const player2NameLabel = document.getElementsByClassName("player-name")[1];
+
 let maxScore;
+let score1 = 0;
+let score2 = 0;
+let current1 = 0;
+let current2 = 0;
+let player1Turn;
+let player1Wins = localStorage.getItem("player1-total-score") || 0;
+let player2Wins = localStorage.getItem("player2-total-score") || 0;
+let playersStoredList;
+
+const updatePlayerList = ()=>{
+    playersStoredList =  JSON.parse(localStorage.getItem("players-list")) || [];
+    playersList.innerText = "";
+    playersStoredList.forEach(player => {
+        const element = document.createElement("option");
+        element.value = player;
+        playersList.appendChild(element);
+    });
+};
+
+updatePlayerList();
+
 
 startButton.addEventListener("click" , (event)=> {
     if(inputGoal.value === "" || inputGoal.value>100){
@@ -29,17 +56,24 @@ startButton.addEventListener("click" , (event)=> {
         scene1.style.display = "none";
         scene2.style.display = "flex";
         tragetLabel.innerText = "Target: " + maxScore;
+        if(!playersStoredList.includes(player1Name.value)){
+            playersStoredList.push(player1Name.value);
+        }
+        if(!playersStoredList.includes( player2Name.value)){
+            playersStoredList.push(player2Name.value);
+        }
+        localStorage.setItem("players-list" , JSON.stringify(playersStoredList) );
+        updatePlayerList();
         startGame();
     }
-})
+});
 
-let score1 = 0;
-let score2 = 0;
-let current1 = 0;
-let current2 = 0;
-let player1Turn;
-let player1Wins = localStorage.getItem("player1-total-score") || 0;
-let player2Wins = localStorage.getItem("player2-total-score") || 0;
+const resetNames = ()=> {
+    localStorage.setItem("players-list" , JSON.stringify([]));
+    updatePlayerList();
+}
+
+
 const startGame = ()=> {
     score1 = score2 = current1 = current2 = 0;
     player1Turn = true;
@@ -52,6 +86,8 @@ const startGame = ()=> {
     turnOverlay.classList.add("starting");
     turnOverlay.classList.remove("end");
     setTimeout(()=>turnOverlay.classList.remove("starting") , 200);
+    player1NameLabel.innerText = player1Name.value || "Player 1";
+    player2NameLabel.innerText = player2Name.value || "Player 2";
     updateValues();
 }
 

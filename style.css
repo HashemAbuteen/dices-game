@@ -68,6 +68,8 @@ body main {
 }
 #scene-1 input{
     font-size: 1em;
+}
+#scene-1 #goal {
     width: 3em;
 }
 button {
@@ -84,8 +86,12 @@ button:disabled {
 #scene-1 button {
     border: white solid 2px;
     color: white;
-    width: 100%;
     padding: 1rem;
+    width: fit-content;
+}
+
+#scene-1>button {
+    width: 100%;
 }
 
 #scene-2 #turn-overlay {
