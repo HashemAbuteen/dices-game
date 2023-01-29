@@ -77,6 +77,8 @@ const resetScores = ()=> {
     localStorage.setItem("scores" , JSON.stringify({}));
     localStorage.setItem("player1-total-score" , 0);
     localStorage.setItem("player2-total-score" , 0);
+    player1Wins = player2Wins = 0 ;
+    updateValues();
 }
 
 
@@ -98,11 +100,16 @@ const startGame = ()=> {
 }
 
 const goHome = ()=> {
+    resetGame();
     scene1.style.display = "flex";
     scene2.style.display = "none";
 }
 
 const resetGame = ()=> {
+    rolling = false;
+    rollButton.disabled = false;
+    hold();
+    endGame(0 , "");
     startGame();
 }
 
