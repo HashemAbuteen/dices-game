@@ -73,6 +73,12 @@ const resetNames = ()=> {
     updatePlayerList();
 }
 
+const resetScores = ()=> {
+    localStorage.setItem("scores" , JSON.stringify({}));
+    localStorage.setItem("player1-total-score" , 0);
+    localStorage.setItem("player2-total-score" , 0);
+}
+
 
 const startGame = ()=> {
     score1 = score2 = current1 = current2 = 0;
